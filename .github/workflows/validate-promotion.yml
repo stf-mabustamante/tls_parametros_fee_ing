@@ -3,7 +3,7 @@ name: Validate Promotion
 on:
   pull_request:
     branches:
-      - master
+      - ["QA"]
 jobs:
   validate:
     runs-on: ubuntu-latest
