@@ -19,6 +19,11 @@ jobs:
         run: |
           pip install -r validator/requirements.txt
 
+      - name: Debug structure
+        run: |
+              pwd
+              find .
+
       - name: Run validator
         run: |
           python validator/main.py
