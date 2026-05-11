@@ -24,7 +24,9 @@ if not manifest_path.exists():
     raise FileNotFoundError(
         f'No existe manifest: {manifest_path.resolve()}'
     )
-
+manifest = ManifestParser().load(
+    str(manifest_path)
+)
 repo_objects = []
 
 repo_objects.extend(
