@@ -17,8 +17,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install -r validator/requirements.txt
 
       - name: Run validator
         run: |
-          python main.py
+          python validator/main.py
