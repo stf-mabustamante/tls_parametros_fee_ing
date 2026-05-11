@@ -13,6 +13,10 @@ from validators.manifest_validator import ManifestValidator
 
 
 manifest = ManifestParser().load('../manifest/promotion-manifest.json')
+if not manifest_path.exists():
+    raise FileNotFoundError(
+        f'No existe manifest: {manifest_path.resolve()}'
+    )
 
 repo_objects = []
 
