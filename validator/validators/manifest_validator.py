@@ -44,4 +44,4 @@ class ManifestValidator:
                 f'Objeto [{object_name}] '
                 f'no existe en promotion-manifest.json'
             )
-       return errors
+        return errors
