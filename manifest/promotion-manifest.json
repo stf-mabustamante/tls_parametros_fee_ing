@@ -1,0 +1,106 @@
+{
+  "name": "tst-stage-cu83",
+  "run_id": "r_Fc1pz9ZakgtiYuqa",
+  "model": "claude-sonnet-4.5",
+  "rules_ref": "master",
+  "framework_repo": "bch-datos/fw-ingesta-tasks",
+  "context_repo": "bch-datos/inputs_ingesta_copilot",
+  "organization": "devsecops",
+ 
+  "mapeo_texto": [
+    {
+      "proyecto": "bch-prj-sti-fil-pr-1231",
+      "dataset": "production_stage",
+      "nombre_tabla": "tbl_feebnc_running_foto_mes",
+      "columna_destino": "periodo_mes",
+      "tipo_clave": null,
+      "tipo_dato": "DATE",
+      "hu": "PAS0050-1301",
+      "celula": "Valhalla"
+    },
+    {
+      "proyecto": "bch-prj-sti-fil-pr-1231",
+      "dataset": "production_stage",
+      "nombre_tabla": "tbl_feebnc_running_foto_mes",
+      "columna_destino": "gerencia",
+      "tipo_clave": null,
+      "tipo_dato": "STRING",
+      "hu": "PAS0050-1301",
+      "celula": "Valhalla"
+    },
+    {
+      "proyecto": "bch-prj-sti-fil-pr-1231",
+      "dataset": "production_stage",
+      "nombre_tabla": "tbl_feebnc_running_foto_mes",
+      "columna_destino": "area",
+      "tipo_clave": null,
+      "tipo_dato": "STRING",
+      "hu": "PAS0050-1301",
+      "celula": "Valhalla"
+    }
+    // 👉 el resto sigue el mismo patrón (clasificacion, fondo*, ingresos, montos, fechas, fhr_carga, etc.)
+  ],
+ 
+  "interfaz_texto": [
+    {
+      "numero_columna": 1,
+      "nombre_campo": "GERENCIA",
+      "tipo_dato": "nvarchar(30)",
+      "descripcion_campo": "Corresponde a la Gerencia donde se especifica el nombre de la gerencia Banchile."
+    },
+    {
+      "numero_columna": 2,
+      "nombre_campo": "AREA",
+      "tipo_dato": "nvarchar(30)",
+      "descripcion_campo": "Corresponde al área donde se especifica el nombre del área de Banchile, incluye el área digital."
+    },
+    {
+      "numero_columna": 3,
+      "nombre_campo": "ZONA",
+      "tipo_dato": "nvarchar(30)",
+      "descripcion_campo": "Corresponde a la zona donde se especifica el nombre de la zona de Banchile."
+    }
+    // 👉 resto de columnas continúa de forma equivalente
+  ],
+ 
+  "config": {
+    "jobName": "tst-stage-cu83",
+    "description": "Descripción de ingesta",
+    "responsables": {
+      "gerencia": "Gerencia",
+      "subgerencia": "SubGerencia",
+      "celula": "AdopcionGCP"
+    },
+    "viewers": [
+      "DSO_TOOLS_PRD_GDD_ADOPCIONGCP_SM",
+      "DSO_TOOLS_PRD_GDD_ADOPCIONGCP_DEV",
+      "DSO_TOOLS_PRD_GDD_ADOPCIONGCP_LT",
+      "DSO_TOOLS_PRD_GDD_ADOPCIONGCP_QA",
+      "DSO_TOOLS_PRD_GDD_QA"
+    ],
+    "environments": [
+      {
+        "name": "desa",
+        "gcpProjectId": "projects/511566960224",
+        "gcpRegion": "us-east4",
+        "cloudRunJob": true
+      },
+      {
+        "name": "qa",
+        "promotion": "aprobacion_para_qa",
+        "gcpProjectId": "projects/61204556412",
+        "gcpRegion": "us-east4",
+        "cloudRunJob": true
+      },
+      {
+        "name": "prod",
+        "promotion": "aprobacion_para_prod",
+        "gcpProjectId": "projects/783049607543",
+        "gcpRegion": "us-east4",
+        "cloudRunJob": true
+      }
+    ],
+    "veracodeAppl": "BDGTAC",
+    "veracodeWorkspace": "DEVSECOPS-GCPRUNPY-BDGTAC"
+  }
+}
