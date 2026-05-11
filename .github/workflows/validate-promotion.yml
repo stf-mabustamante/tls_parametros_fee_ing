@@ -1,9 +1,10 @@
 name: Validate Promotion
 
 on:
+  #triggers the workflow on pull request to to main branches
   pull_request:
     branches:
-      - ["QA"]
+      - ["main"]
 jobs:
   validate:
     runs-on: ubuntu-latest
