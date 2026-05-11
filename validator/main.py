@@ -1,73 +1,117 @@
 from pathlib import Path
+
+from parsers.ini_parser import IniParser
+from parsers.yaml_parser import YamlParser
 from parsers.json_parser import ManifestParser
 
-from scanners.tls_scanner import TLSScanner
-#from scanners.stg_scanner import STGScanner
-#from scanners.universal_scanner import UniversalScanner
+from scanners.ini_scanner import IniScanner
 
+from validators.framework_validator import FrameworkValidator
 from validators.manifest_validator import ManifestValidator
-#from validators.naming_validator import NamingValidator
-#from validators.framework_validator import FrameworkValidator
-#from validators.dependency_validator import DependencyValidator
 
-#from ai.review_agent import ReviewAgent
 
 BASE_DIR = Path(__file__).resolve().parent
 
-manifest_path = (
+
+TASK_CATALOG_PATH = (
+    BASE_DIR
+    / 'config'
+    / 'task_catalog.yaml'
+)
+
+
+MANIFEST_PATH = (
     BASE_DIR.parent
     / 'manifest'
     / 'promotion-manifest.json'
 )
 
-if not manifest_path.exists():
-    raise FileNotFoundError(
-        f'No existe manifest: {manifest_path.resolve()}'
-    )
+TLS_PARAMETROS_PATH = (
+    BASE_DIR.parent
+    / 'tls_parametros'
+)
+
+
+print('Loading task catalog...')
+
+catalog = YamlParser().load(
+    str(TASK_CATALOG_PATH)
+)
+
+
+print('Loading manifest...')
+
 manifest = ManifestParser().load(
-    str(manifest_path)
+    str(MANIFEST_PATH)
 )
-print("manifest",manifest)
-repo_objects = []
 
-repo_objects.extend(
-    TLSScanner().scan('./tls_parametros')
+
+print('Scanning ini files...')
+
+ini_files = IniScanner().scan(
+    str(TLS_PARAMETROS_PATH)
 )
-print("repo_objects",repo_objects)
-#repo_objects.extend(
- #   STGScanner().scan('./stg')
-#)
 
-#repo_objects.extend(
-#    UniversalScanner().scan('./universal')
-#)
 
-errors = []
+framework_validator = FrameworkValidator()
+manifest_validator = ManifestValidator()
 
-errors.extend(
-    ManifestValidator().validate(
-        manifest.objetos,
-        repo_objects
+
+all_errors = []
+
+
+for ini_file in ini_files:
+
+    print(f'Processing: {ini_file}')
+
+    tasks = IniParser().parse(
+        str(ini_file)
     )
-)
 
-#errors.extend(
-#    NamingValidator().validate(repo_objects)
-#)
+    for task in tasks:
 
-#errors.extend(
-#    DependencyValidator().validate(repo_objects)
-#)
+        task_definition = catalog[
+            'tasks'
+        ].get(task.task_name)
 
-for error in errors:
-    print(f'ERROR: {error}')
+        if task_definition is None:
 
-#if errors:
-#    raise Exception('Validación fallida')
-#  comments = ReviewAgent().review(
-#    errors,
-#    repo_objects
-#)
+            all_errors.append(
+                f'Task no registrada: '
+                f'{task.task_name}'
+            )
 
-#for comment in comments:
- #   print(comment)
+            continue
+
+        if not task_definition.get(
+            'promocionable',
+            False
+        ):
+            continue
+
+        framework_errors = framework_validator.validate(
+            task,
+            task_definition
+        )
+
+        manifest_errors = manifest_validator.validate(
+            task,
+            task_definition,
+            manifest
+        )
+
+        all_errors.extend(framework_errors)
+        all_errors.extend(manifest_errors)
+
+
+if all_errors:
+
+    print('\nVALIDATION ERRORS:\n')
+
+    for error in all_errors:
+        print(error)
+
+    raise Exception(
+        'Promotion validation failed'
+    )
+print('\nPromotion validation successful')
