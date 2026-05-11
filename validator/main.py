@@ -11,8 +11,14 @@ from validators.manifest_validator import ManifestValidator
 
 #from ai.review_agent import ReviewAgent
 
+BASE_DIR = Path(__file__).resolve().parent
 
-manifest = ManifestParser().load('../manifest/promotion-manifest.json')
+manifest_path = (
+    BASE_DIR.parent
+    / 'manifest'
+    / 'promotion-manifest.json'
+)
+
 if not manifest_path.exists():
     raise FileNotFoundError(
         f'No existe manifest: {manifest_path.resolve()}'
