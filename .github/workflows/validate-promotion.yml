@@ -21,8 +21,8 @@ jobs:
 
       - name: Debug structure
         run: |
-              pwd
-              find .
+          pwd
+          find .
 
       - name: Run validator
         run: |
