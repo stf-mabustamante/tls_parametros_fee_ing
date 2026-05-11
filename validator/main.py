@@ -12,9 +12,7 @@ from validators.manifest_validator import ManifestValidator
 #from ai.review_agent import ReviewAgent
 
 
-manifest = ManifestParser().load(
-    '../manifest/promotion-manifest.json'
-)
+manifest = ManifestParser().load('../manifest/promotion-manifest.json')
 
 repo_objects = []
 
