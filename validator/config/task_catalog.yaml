@@ -45,7 +45,6 @@ tasks:
       type: dbt_models
 	   
 	  extractor:
-
         from: MESSAGE.appname
 	  
 
