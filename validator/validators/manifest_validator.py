@@ -1,28 +1,47 @@
+from utils.dict_utils import get_nested
+
+
 class ManifestValidator:
 
-    def validate(self, manifest_objects, repo_objects):
+    def validate(self,
+                 task,
+                 task_definition,
+                 manifest):
 
         errors = []
 
-        manifest_names = {
-            obj.nombre for obj in manifest_objects
-        }
+        produces = task_definition.get('produces')
 
-        repo_names = {
-            obj.nombre for obj in repo_objects
-        }
+        if not produces:
+            return errors
 
-        sobrantes = repo_names - manifest_names
-        faltantes = manifest_names - repo_names
+        extractor = produces.get('extractor')
+                   
+        if not extractor:
+            return errors
 
-        for item in sobrantes:
+        extraction_path = extractor.get('from')
+
+        object_name = get_nested(
+            task.params,
+            extraction_path
+        )
+
+        if object_name is None:
+
             errors.append(
-                f'Objeto no declarado en verdad.json: {item}'
+                f'No se pudo extraer objeto '
+                f'para task {task.task_name}'
             )
 
-        for item in faltantes:
-            errors.append(
-                f'Objeto declarado pero inexistente: {item}'
-            )
+            return errors
 
-        return errors
+        manifest_text = str(manifest)
+
+        if object_name not in manifest_text:
+
+            errors.append(
+                f'Objeto [{object_name}] '
+                f'no existe en promotion-manifest.json'
+            )
+       return errors
