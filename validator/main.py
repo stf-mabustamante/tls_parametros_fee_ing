@@ -27,12 +27,13 @@ if not manifest_path.exists():
 manifest = ManifestParser().load(
     str(manifest_path)
 )
+print("manifest",manifest)
 repo_objects = []
 
 repo_objects.extend(
     TLSScanner().scan('./tls_parametros')
 )
-
+print("repo_objects",repo_objects)
 #repo_objects.extend(
  #   STGScanner().scan('./stg')
 #)
