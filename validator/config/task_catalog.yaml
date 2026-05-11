@@ -15,8 +15,8 @@ tasks:
       FLG_PCM
       MASTER_MACHINE_TYPE
       MESSAGE.appname
-	    MESSAGE.runid
-	    MESSAGE.periodo
+	  MESSAGE.runid
+	  MESSAGE.periodo
       NUN_WORKERS
       PCM_CLOUDRUN_JOB
       PCM_DATABASE_URL
