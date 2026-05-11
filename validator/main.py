@@ -13,7 +13,7 @@ from validators.manifest_validator import ManifestValidator
 
 
 manifest = ManifestParser().load(
-    'verdad.json'
+    '../manifest/promotion-manifest.json'
 )
 
 repo_objects = []
