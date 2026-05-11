@@ -1,3 +1,4 @@
+from pathlib import Path
 from parsers.json_parser import ManifestParser
 
 from scanners.tls_scanner import TLSScanner
