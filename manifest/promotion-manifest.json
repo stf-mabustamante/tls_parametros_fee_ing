@@ -38,7 +38,6 @@
       "hu": "PAS0050-1301",
       "celula": "Valhalla"
     }
-    // 👉 el resto sigue el mismo patrón (clasificacion, fondo*, ingresos, montos, fechas, fhr_carga, etc.)
   ],
  
   "interfaz_texto": [
