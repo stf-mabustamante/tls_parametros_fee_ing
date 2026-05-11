@@ -59,7 +59,6 @@
       "tipo_dato": "nvarchar(30)",
       "descripcion_campo": "Corresponde a la zona donde se especifica el nombre de la zona de Banchile."
     }
-    // 👉 resto de columnas continúa de forma equivalente
   ],
  
   "config": {
