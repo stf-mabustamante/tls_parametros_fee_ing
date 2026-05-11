@@ -26,4 +26,5 @@ jobs:
 
       - name: Run validator
         run: |
-          python validator/main.py
+          cd validator
+          python main.py
