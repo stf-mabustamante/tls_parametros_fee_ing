@@ -99,7 +99,7 @@ for ini_file in ini_files:
             continue
 
     framework_errors = framework_validator.validate(
-            task, #compara la tarea del archivo .ini
+            task, #compara la tarea del archivo .ini con definicion de tarea del archivo task_catalog.yaml. Busca parametros oblogatorios
             task_definition  #definicion de tarea del archivo task_catalog.yaml
         )
 
