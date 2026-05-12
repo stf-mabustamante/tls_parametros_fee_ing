@@ -38,6 +38,16 @@ catalog = YamlParser().load(
     str(TASK_CATALOG_PATH)
 )
 print("catalog:",catalog)
+#{'tasks': 
+#                 {'fw_ingesta_tasks.dbt/run:dbt_run': 
+#	                                                 {'category': 'DBT'
+#	                                                 , 'promocionable': True, 
+#	                                                 'required_params': ['BYPASS', 'CLOUD_RUN_NAME', 'CONDA_ENV', 'ENABLED', 'FLG_CLOUD_RUN', 'FLG_PCM', 'MASTER_MACHINE_TYPE', 'MESSAGE.appname', 'MESSAGE.runid', 'MESSAGE.periodo', 'NUN_WORKERS', 'PCM_CLOUDRUN_JOB', 'PCM_DATABASE_URL', 'PCM_DEFAULT_CONTROLS_SA', 'PCM_DEFAULT_SA', 'PCM_DOM_BUCKET_RAW', 'PCM_DOM_BUCKET_UDF', 'PCM_DOM_PROJECT_ID', 'PCM_ENVIRONMENT', 'PCM_EXTRA_VARS', 'PCM_INVOKER_SA', 'PCM_PROJECT_ID', 'PCM_PUBSUB_TOPIC', 'PROJECT', 'SERVICE_ACCOUNT', 'SISTEMA', 'TOPICS_EXECUTE', 'TOPICS_MONITOR', 'WORKER_BOOT_DISK_SIZE']
+#                                                     , 'optional_params': ['WORKER_MACHINE_TYPE']
+#                                                     , 'produces': {'type': 'dbt_model', 'extractor': {'from': 'MESSAGE.appname'}}
+#                                                     }
+#	             }
+#       }
 
 print('Loading manifest...')
 
