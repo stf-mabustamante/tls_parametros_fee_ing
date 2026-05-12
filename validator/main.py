@@ -28,7 +28,7 @@ MANIFEST_PATH = (
 
 TLS_PARAMETROS_PATH = (
     BASE_DIR.parent
-    ../ 'work_edge/'
+    / 'work_edge'
 )
 
 
