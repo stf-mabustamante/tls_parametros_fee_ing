@@ -103,6 +103,9 @@ for ini_file in ini_files:
             task_definition  #definicion de tarea del archivo task_catalog.yaml
         )
 
+    #obtiene el producer.extractor de la tarea, por ejemplo producer {type:dbt_models,extractor: from:MESSAGE.appname} 
+    #obtiene el valor del parametro especificado en el extractor, buscando dentro del .ini
+    #el valor del parametro lo busca en el manifest
     manifest_errors = manifest_validator.validate(
             task,
             task_definition,
