@@ -1,5 +1,4 @@
 import json
-import configparser
 
 from models.framework_task import FrameworkTask
 
@@ -8,19 +7,31 @@ class IniParser:
 
     def parse(self, file_path: str):
 
-        parser = configparser.ConfigParser()
+        params = {}
 
-        parser.optionxform = str
+        with open(file_path, 'r', encoding='utf-8') as f:
 
-        parser.read(file_path)
+            for raw_line in f:
 
-        tasks = []
+                line = raw_line.strip()
 
-        for section in parser.sections():
-          
-            params = {}
+                if not line:
+                    continue
 
-            for key, value in parser[section].items():
+                if line.startswith('#'):
+                    continue
+
+                if '=' not in line:
+                    continue
+
+                key, value = line.split(
+                    '=',
+                    1
+                )
+
+                key = key.strip()
+
+                value = value.strip().strip('\"')
 
                 if key == 'MESSAGE':
 
@@ -33,11 +44,15 @@ class IniParser:
                 else:
                     params[key] = value
 
-            task = FrameworkTask(
-                task_name=section,
-                params=params
+        task_name = params.get('TASK')
+
+        if task_name is None:
+
+            raise Exception(
+                f'Archivo {file_path} no tiene TASK'
             )
 
-            tasks.append(task)
-
-        return tasks
+        return FrameworkTask(
+            task_name=task_name,
+            params=params
+        )
