@@ -11,7 +11,7 @@ from validators.manifest_validator import ManifestValidator
 
 
 BASE_DIR = Path(__file__).resolve().parent
-
+print("BASE_DIR:",BASE_DIR)
 
 TASK_CATALOG_PATH = (
     BASE_DIR
