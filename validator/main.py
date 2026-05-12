@@ -64,12 +64,10 @@ for ini_file in ini_files:
 
     print(f'Processing: {ini_file}')
 
-    tasks = IniParser().parse(
+    task = IniParser().parse(
         str(ini_file)
     )
-    print("tasks:",tasks)
-    for task in tasks:
-
+    print("task:",task)
         task_definition = catalog[
             'tasks'
         ].get(task.task_name)
