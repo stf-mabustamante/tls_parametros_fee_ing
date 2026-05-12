@@ -67,7 +67,7 @@ for ini_file in ini_files:
     tasks = IniParser().parse(
         str(ini_file)
     )
-    print("task:",task)
+    print("tasks:",tasks)
     for task in tasks:
 
         task_definition = catalog[
