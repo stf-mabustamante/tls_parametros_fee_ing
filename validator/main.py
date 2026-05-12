@@ -80,7 +80,8 @@ for ini_file in ini_files:
     )
     print("task:",task)
     #FrameworkTask(task_name='fw_ingesta_tasks.dbt/run:dbt_run', params={'TASK': 'fw_ingesta_tasks.dbt/run:dbt_run,'ACCION': 'execute_framework', 'SISTEMA': 'fee'...
-    
+
+    #obtenemos la definicion completa de la tarea.
     task_definition = catalog['tasks'].get(task.task_name)
     print("task_definition:",task_definition)
     if task_definition is None:
