@@ -99,8 +99,8 @@ for ini_file in ini_files:
             continue
 
     framework_errors = framework_validator.validate(
-            task,
-            task_definition
+            task, #compara la tarea del archivo .ini
+            task_definition  #definicion de tarea del archivo task_catalog.yaml
         )
 
     manifest_errors = manifest_validator.validate(
