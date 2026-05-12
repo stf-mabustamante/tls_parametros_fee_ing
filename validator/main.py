@@ -37,21 +37,21 @@ print('Loading task catalog...')
 catalog = YamlParser().load(
     str(TASK_CATALOG_PATH)
 )
-
+print("catalog:",catalog)
 
 print('Loading manifest...')
 
 manifest = ManifestParser().load(
     str(MANIFEST_PATH)
 )
-
+print("manifest:",manifest)
 
 print('Scanning ini files...')
 
 ini_files = IniScanner().scan(
     str(TLS_PARAMETROS_PATH)
 )
-
+print("ini_files:",ini_files)
 
 framework_validator = FrameworkValidator()
 manifest_validator = ManifestValidator()
@@ -73,7 +73,7 @@ for ini_file in ini_files:
         task_definition = catalog[
             'tasks'
         ].get(task.task_name)
-
+        print("task_definition:",task_definition)
         if task_definition is None:
 
             all_errors.append(
