@@ -68,12 +68,9 @@ for ini_file in ini_files:
         str(ini_file)
     )
     print("task:",task)
-        task_definition = catalog[
-            'tasks'
-        ].get(task.task_name)
-        print("task_definition:",task_definition)
-        if task_definition is None:
-
+    task_definition = catalog['tasks'].get(task.task_name)
+    print("task_definition:",task_definition)
+    if task_definition is None:
             all_errors.append(
                 f'Task no registrada: '
                 f'{task.task_name}'
@@ -81,25 +78,25 @@ for ini_file in ini_files:
 
             continue
 
-        if not task_definition.get(
+    if not task_definition.get(
             'promocionable',
             False
         ):
             continue
 
-        framework_errors = framework_validator.validate(
+    framework_errors = framework_validator.validate(
             task,
             task_definition
         )
 
-        manifest_errors = manifest_validator.validate(
+    manifest_errors = manifest_validator.validate(
             task,
             task_definition,
             manifest
         )
 
-        all_errors.extend(framework_errors)
-        all_errors.extend(manifest_errors)
+    all_errors.extend(framework_errors)
+    all_errors.extend(manifest_errors)
 
 
 if all_errors:
