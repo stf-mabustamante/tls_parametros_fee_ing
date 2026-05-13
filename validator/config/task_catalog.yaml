@@ -10,7 +10,6 @@ tasks:
       - MESSAGE.appname
       - MESSAGE.runid
       - MESSAGE.dbt_project
-      - MESSAGE.periodo
       - PROJECT
       - SERVICE_ACCOUNT
       - SISTEMA
