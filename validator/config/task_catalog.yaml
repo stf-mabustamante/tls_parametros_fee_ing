@@ -89,5 +89,6 @@ tasks:
     produces:
 
       type: dbt_model
+      
       extractor:
         from: MESSAGE.table_name
