@@ -1,5 +1,4 @@
 name: Validate Promotion
-
 on:
   #triggers the workflow on pull request to to main branches
   pull_request:
@@ -27,5 +26,5 @@ jobs:
 
       - name: Run validator
         run: |
-          cd validator 
+          cd validator
           python main.py

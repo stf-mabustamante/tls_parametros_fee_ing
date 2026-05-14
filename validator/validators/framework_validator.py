@@ -23,7 +23,7 @@ class FrameworkValidator:
 
                 errors.append(
                     f'Task [{task.task_name}] '
-                   f'no tiene parámetro requerido: '
+                    f'no tiene parámetro requerido: '
                     f'{required_param}'
                 )
 
